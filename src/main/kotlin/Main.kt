@@ -1,10 +1,10 @@
 fun main(args: Array<String>) {
     val puzzle: Puzzle = Day1()
 
-    if (args.size > 1 && args[0] == "p2") {
-        puzzle.solvePartOne()
+    if (args.isNotEmpty() && args[0] == "p2") {
+        puzzle.solvePartTwo()
     }
     else {
-        puzzle.solvePartTwo()
+        puzzle.solvePartOne()
     }
 }

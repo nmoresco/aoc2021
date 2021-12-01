@@ -1,33 +1,19 @@
 class Day1 : Puzzle() {
 
     override fun solvePartOne() {
-        val lines = readPuzzle("1-1.txt").map { Integer.parseInt(it) }
+        val nums = readPuzzle("1-1.txt").map { Integer.parseInt(it) }
 
-        findNumIncreases(lines)
+        printNumIncreases(nums)
     }
 
     override fun solvePartTwo() {
-        val lines = readPuzzle("1-1.txt").map { Integer.parseInt(it) }
+        val nums = readPuzzle("1-1.txt").map { Integer.parseInt(it) }
 
-        val triples = mutableListOf<Int>()
-        for (i in 0 until lines.size - 2) {
-            triples.add(lines[i] + lines[i + 1] + lines[i + 2])
-        }
-
-        findNumIncreases(triples)
+        printNumIncreases(nums.windowed(3).map { it[0] + it[1] + it[2] })
     }
 
-    private fun findNumIncreases(lines: List<Int>) {
-        var curNum = 0
-        var count = -1
-
-        lines.forEach {
-            if (it > curNum) {
-                count++
-            }
-            curNum = it
-        }
-
-        println(count)
+    private fun printNumIncreases(nums: List<Int>) {
+        // windowed provides a sliding view of the list, very handy!
+        println(nums.windowed(2).count { it[0] < it[1] })
     }
 }
