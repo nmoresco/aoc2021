@@ -1,4 +1,4 @@
-class Day1 : Puzzle() {
+class Day1 : Puzzle {
 
     override fun solvePartOne() {
         val nums = readPuzzle("1-1.txt").map { Integer.parseInt(it) }

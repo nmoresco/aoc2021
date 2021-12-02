@@ -1,4 +1,4 @@
-class Day2 : Puzzle() {
+class Day2 : Puzzle {
 
     override fun solvePartOne() {
         val commands = readInput()
@@ -41,6 +41,7 @@ class Day2 : Puzzle() {
     private fun readInput(): List<Pair<String, Int>> {
         val commands = readPuzzle("1-2.txt")
             .flatMap { line ->
+                // Didn't need to use windowed here. Was too excited about discovering it in day 1.
                 line.split(" ")
                     .windowed(2) { Pair(it[0], Integer.parseInt(it[1])) }
             }

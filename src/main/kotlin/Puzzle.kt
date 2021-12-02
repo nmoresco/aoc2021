@@ -1,5 +1,5 @@
-abstract class Puzzle {
-    abstract fun solvePartOne()
+interface Puzzle {
+    fun solvePartOne()
 
-    abstract fun solvePartTwo()
+    fun solvePartTwo()
 }
