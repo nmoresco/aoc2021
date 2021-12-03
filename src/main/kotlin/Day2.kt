@@ -39,7 +39,7 @@ class Day2 : Puzzle {
     }
 
     private fun readInput(): List<Pair<String, Int>> {
-        val commands = readPuzzle("1-2.txt")
+        val commands = readPuzzle("2-1.txt")
             .flatMap { line ->
                 // Didn't need to use windowed here. Was too excited about discovering it in day 1.
                 line.split(" ")
