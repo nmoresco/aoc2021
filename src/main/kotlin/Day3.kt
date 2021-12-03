@@ -44,8 +44,8 @@ class Day3 : Puzzle {
         }
 
         // Convert from Int array -> String -> decimal
-        val oxygen = Integer.parseInt(oxygenList[0].map { it.toString() }.reduce { acc, char -> acc + char }, 2)
-        val co2 = Integer.parseInt(co2List[0].map { it.toString() }.reduce { acc, char -> acc + char }, 2)
+        val oxygen = oxygenList[0].map { it.toString() }.reduce { acc, char -> acc + char }.let { Integer.parseInt(it, 2) }
+        val co2 = co2List[0].map { it.toString() }.reduce { acc, char -> acc + char }.let { Integer.parseInt(it, 2) }
 
         println(oxygen * co2)
     }
