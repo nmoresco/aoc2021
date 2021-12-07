@@ -33,21 +33,20 @@ class Day6 : Puzzle {
             }
         }.filterNotNull().toMap()
     }
-}
 
+    // Data structure is the phase mapped to the number of fish in that phase
+    private fun readInput(): Map<Int, Long> {
+        val map = HashMap<Int, Long>()
 
-// Data structure is the phase mapped to the number of fish in that phase
-private fun readInput(): Map<Int, Long> {
-    val map = HashMap<Int, Long>()
+        readPuzzle("6-1.txt")
+            .first()
+            .split(",")
+            .map { it.toInt() }
+            .forEach {
+                map[it] = map.getOrPut(it) { 0 } + 1
+            }
 
-    readPuzzle("6-1.txt")
-        .first()
-        .split(",")
-        .map { it.toInt() }
-        .forEach {
-            map[it] = map.getOrPut(it) { 0 } + 1
-        }
-
-    return map
+        return map
+    }
 }
 
