@@ -13,7 +13,7 @@ class Day8 : Puzzle {
 
         val sum = lines.sumOf { line ->
             // Let's first identify the unique length segments (1, 4, 7, 8)
-            val segments = line.first.associateBy { segmentLength[it.size] ?: -1 }.toMutableMap()
+            val segments: MutableMap<Int, Set<Char>> = line.first.associateBy { segmentLength[it.size] ?: -1 }.toMutableMap()
 
             // Consider all the 6-length segments (0, 6, 9)
             val sixLengthSegments = line.first.filter { it.size == 6 }.toMutableList()
