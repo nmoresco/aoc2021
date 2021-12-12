@@ -13,7 +13,6 @@ class Day10 : Puzzle {
         })
     }
 
-
     override fun solvePartTwo() {
         val lines = readInput()
 
