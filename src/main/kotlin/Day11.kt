@@ -8,57 +8,69 @@ class Day11 : Puzzle {
         var jellys = readInput()
         var numFlashes = 0
 
-        for (i in 0..1) {
-            val nextStep = jellys.map { row ->
-                row.map { it + 1 }.toMutableList()
-            }
-
-            val visited = mutableSetOf<Pair<Int, Int>>()
-
-            for (row in jellys.indices) {
-                for (col in jellys[row].indices) {
-                    if (nextStep[row][col] > 9) {
-                        bfs(nextStep, row to col, visited)
-                    }
-                }
-            }
-
-            jellys = nextStep.map { row -> row.map { if (it > 9) 0 else it }}
-
-            printMatrix(jellys)
-            println("==============")
+        for (i in 0..99) {
+            val pair = step(jellys)
+            jellys = pair.first
+            numFlashes += pair.second
         }
 
         println(numFlashes)
     }
 
     override fun solvePartTwo() {
+        var jellys = readInput()
+        var numFlashes = 0
+        var step = 0
+
+        while (numFlashes != jellys[0].size * jellys.size) {
+            val pair = step(jellys)
+            jellys = pair.first
+            numFlashes = pair.second
+            step++
+        }
+
+        println(step)
     }
 
-    private fun bfs(
-        jellys: List<MutableList<Int>>,
-        point: Pair<Int, Int>,
-        visited: MutableSet<Pair<Int, Int>> = mutableSetOf()
-    ) {
+    private fun step(jellys: List<List<Int>>): Pair<List<List<Int>>, Int> {
+        var numFlashes = 0
+        val nextStep = jellys.map { row ->
+            row.map { it + 1 }.toMutableList()
+        }
 
-        val queue: MutableList<Pair<Int, Int>> = mutableListOf(point)
-        while (queue.isNotEmpty()) {
-            // Dequeue a node from queue
-            val node = queue.removeAt(0)
+        var foundFlash = true
 
-            if (!visited.contains(node)) {
-                if (jellys[node.first][node.second] > 9) {
-                    directions.forEach {
-                        if (checkBounds(jellys, node.first + it.first, node.second + it.second)) {
-                            jellys[node.first + it.first][node.second + it.second]++
-                            queue.add(node.first + it.first to node.second + it.second)
-                        }
-                    }
-                }
-                // Mark the dequeued node as visited
-                visited.add(node)
+        // Keep going until we don't get any new flashes
+        while (foundFlash) {
+            foundFlash = false
+            val nextFlashes = propagateFlashes(nextStep)
+            if (nextFlashes > 0) {
+                foundFlash = true
+                numFlashes += nextFlashes
             }
         }
+
+        return Pair(nextStep, numFlashes)
+    }
+
+    private fun propagateFlashes(jellys: List<MutableList<Int>>): Int {
+        var numFlashes = 0
+        for (row in jellys.indices) {
+            for (col in jellys[row].indices) {
+                if (jellys[row][col] > 9) {
+                    directions.forEach {
+                        if (checkBounds(jellys, row + it.first, col + it.second)
+                            && jellys[row + it.first][col + it.second] > 0) {
+                            jellys[row + it.first][col + it.second]++
+                        }
+                    }
+                    numFlashes++
+                    jellys[row][col] = 0
+                }
+            }
+        }
+
+        return numFlashes
     }
 
     private fun <T> checkBounds(

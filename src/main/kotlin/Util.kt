@@ -43,7 +43,7 @@ private fun <T> checkBounds(
 fun <T> printMatrix(matrix: List<List<T>>) {
     for (row in matrix) {
         for (col in row) {
-            print("$col ")
+            print("$col")
 
             if (col is String && col.isEmpty()) {
                 print(". ")
