@@ -21,11 +21,12 @@ class Day13 : Puzzle {
         val input = readInput()
 
         var map = input.first
+        val folds = input.second
 
         var width = map.keys.maxOf { it.first }
         var height = map.keys.maxOf { it.second }
 
-        input.second.forEach { fold ->
+        folds.forEach { fold ->
             map = fold(map.toMutableMap(), width, height, fold)
             width = map.keys.maxOf { it.first }
             height = map.keys.maxOf { it.second }
@@ -50,7 +51,7 @@ class Day13 : Puzzle {
                 for (col in 0..width) {
                     if (map.containsKey(col to row)) {
                         map.remove(col to row)
-                        map[col to height - row] = '#'
+                        map[col to row - (2 * (row - fold.coord))] = '#'
                     }
                 }
             }
@@ -60,7 +61,7 @@ class Day13 : Puzzle {
                 for (col in fold.coord..width) {
                     if (map.containsKey(col to row)) {
                         map.remove(col to row)
-                        map[width - col to row] = '#'
+                        map[col - (2 * (col - fold.coord)) to row] = '#'
                     }
                 }
             }
