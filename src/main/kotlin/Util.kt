@@ -1,6 +1,7 @@
 import java.io.File
 
-private var directions = listOf(Pair(1, 0), Pair(-1, 0), Pair(0, 1), Pair(0, -1))
+var directions = listOf(Pair(1, 0), Pair(-1, 0), Pair(0, 1), Pair(0, -1))
+var directionsWithDiagonals = listOf(Pair(1, 0), Pair(-1, 0), Pair(0, 1), Pair(0, -1), Pair(1, 1), Pair(-1, 1), Pair(1, -1), Pair(-1, -1))
 
 fun readPuzzle(fileName: String): List<String> =
     File("/Users/nick.moresco/Code/advent/2021/src/main/resources/$fileName").useLines { it.toList() }
@@ -34,7 +35,7 @@ fun <T> dfs(
     return visited
 }
 
-private fun <T> checkBounds(
+fun <T> checkBounds(
     map: List<List<T>>,
     newRow: Int,
     newCol: Int

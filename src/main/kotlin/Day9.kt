@@ -1,7 +1,5 @@
 class Day9 : Puzzle {
 
-    private var directions = listOf(Pair(1, 0), Pair(-1, 0), Pair(0, 1), Pair(0, -1))
-
     override fun solvePartOne() {
         val map = readInput()
 

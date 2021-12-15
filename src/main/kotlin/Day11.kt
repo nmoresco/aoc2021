@@ -1,8 +1,6 @@
 class Day11 : Puzzle {
 
-    private var directions =
-        listOf(Pair(1, 0), Pair(-1, 0), Pair(0, 1), Pair(0, -1), Pair(1, 1), Pair(-1, 1), Pair(1, -1), Pair(-1, -1))
-
+    private var directions = directionsWithDiagonals
 
     override fun solvePartOne() {
         var jellys = readInput()

@@ -1,5 +1,5 @@
 fun main(args: Array<String>) {
-    val puzzle: Puzzle = Day14()
+    val puzzle: Puzzle = Day15()
 
     if (args.isNotEmpty() && args[0] == "p2") {
         puzzle.solvePartTwo()
